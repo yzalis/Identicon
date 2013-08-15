@@ -1,0 +1,170 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Identicon by yzalis</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Identicon</h1>
+        <p>Generate awesome and unique identicons with beautiful colors</p>
+
+        <p class="view"><a href="https://github.com/yzalis/Identicon">View the Project on GitHub <small>yzalis/Identicon</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/yzalis/Identicon/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/yzalis/Identicon/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/yzalis/Identicon">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="identicon-generator-for-php" class="anchor" href="#identicon-generator-for-php"><span class="octicon octicon-link"></span></a>Identicon generator for PHP</h1>
+
+<p><a href="http://travis-ci.org/yzalis/Identicon"><img src="https://secure.travis-ci.org/yzalis/Identicon.png" alt="Build Status"></a></p>
+
+<p><strong>Identicon</strong> is a library which generate an <a href="http://en.wikipedia.org/wiki/Identicon">identicon</a> image based on a string.</p>
+
+<p>Here is some examples of awesome results!</p>
+
+<p><img src="doc/benjaminAtYzalisDotCom.png" alt="Identicon example #1">  
+<img src="doc/Benjamin.png" alt="Identicon example #2">  
+<img src="doc/8.8.8.8.png" alt="Identicon example #3">  
+<img src="doc/8.8.4.4.png" alt="Identicon example #4">  
+<img src="doc/yzalis.png" alt="Identicon example #5"></p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>The recommended way to install Identicon is through composer.</p>
+
+<p>Just create a <code>composer.json</code> file for your project:</p>
+
+<div class="highlight"><pre><span class="p">{</span>
+    <span class="nt">"require"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"yzalis/identicon"</span><span class="p">:</span> <span class="s2">"*"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>And run these two commands to install it:</p>
+
+<div class="highlight"><pre><span class="nv">$ </span>wget http://getcomposer.org/composer.phar
+<span class="nv">$ </span>php composer.phar install
+</pre></div>
+
+<p>Now you can add the autoloader, and you will have access to the library:</p>
+
+<div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+</pre></div>
+
+<p>If you don't use either <strong>Composer</strong> or a <em>ClassLoader</em> in your application, just require the provided autoloader:</p>
+
+<div class="highlight"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="k">require_once</span> <span class="s1">'src/autoload.php'</span><span class="p">;</span>
+</pre></div>
+
+<p>You're done.</p>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Images are generated in PNG format with transparent background.</p>
+
+<p>The string can be an email, an IP address, a username, an ID or something else.</p>
+
+<h3>
+<a name="generate-an-identicon" class="anchor" href="#generate-an-identicon"><span class="octicon octicon-link"></span></a>Generate an identicon</h3>
+
+<p>Create a new <code>Identicon</code> object.</p>
+
+<div class="highlight"><pre><span class="nv">$identicon</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Identicon</span><span class="p">();</span>
+
+</pre></div>
+
+<p>Then you can generate and display an identicon image</p>
+
+<div class="highlight"><pre><span class="nv">$identicon</span><span class="o">-&gt;</span><span class="na">displayImage</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">);</span>
+</pre></div>
+
+<p>or generate and get the image data.</p>
+
+<div class="highlight"><pre><span class="nv">$imageData</span> <span class="o">=</span> <span class="nv">$identicon</span><span class="o">-&gt;</span><span class="na">getImageData</span><span class="p">(</span><span class="s1">'bar'</span><span class="p">);</span>
+</pre></div>
+
+<h3>
+<a name="change-the-size" class="anchor" href="#change-the-size"><span class="octicon octicon-link"></span></a>Change the size</h3>
+
+<p>By default the size will be 64 pixels. If you want to change the image size just add a secondary parameter. 512 x 512px in this example.</p>
+
+<div class="highlight"><pre><span class="nv">$identicon</span><span class="o">-&gt;</span><span class="na">displayImage</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">,</span> <span class="mi">512</span><span class="p">);</span>
+</pre></div>
+
+<h3>
+<a name="color" class="anchor" href="#color"><span class="octicon octicon-link"></span></a>Color</h3>
+
+<p>The color is automaticaly generated according to the string hash but you can chose to specify a color by adding a third argument.</p>
+
+<p>Color can be an hexadecimal with 6 characters</p>
+
+<div class="highlight"><pre><span class="nv">$identicon</span><span class="o">-&gt;</span><span class="na">displayImage</span><span class="p">(</span><span class="s1">'bar'</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="s1">'A87EDF'</span><span class="p">);</span>
+</pre></div>
+
+<p>or an array with red, green, blue value</p>
+
+<div class="highlight"><pre><span class="nv">$identicon</span><span class="o">-&gt;</span><span class="na">displayImage</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">150</span><span class="p">));</span>
+</pre></div>
+
+<p>That's it!</p>
+
+<h2>
+<a name="unit-tests" class="anchor" href="#unit-tests"><span class="octicon octicon-link"></span></a>Unit Tests</h2>
+
+<p>To run unit tests, you'll need and a set of dependencies you can install using Composer:</p>
+
+<pre><code>php composer.phar install
+</code></pre>
+
+<p>Once installed, just launch the following command:</p>
+
+<pre><code>phpunit
+</code></pre>
+
+<p>Everythings should be ok.</p>
+
+<h2>
+<a name="credits" class="anchor" href="#credits"><span class="octicon octicon-link"></span></a>Credits</h2>
+
+<ul>
+<li>Benjamin Laugueux <a href="mailto:benjamin@laugueux.org">benjamin@laugueux.org</a>
+</li>
+<li><a href="https://github.com/yzalis/Identicon">All contributors</a></li>
+</ul><p>Inspired by Github <a href="https://github.com/blog/1586-identicons">blog post</a> about Identicon.</p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>Identicon is released under the MIT License. See the bundled LICENSE file for details.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/yzalis">yzalis</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
