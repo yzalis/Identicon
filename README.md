@@ -64,7 +64,6 @@ Create a new ```Identicon``` object.
 
 ``` php
 $identicon = new Identicon();
-
 ```
 
 Then you can generate and display an identicon image
@@ -79,13 +78,13 @@ or generate and get the image data
 $imageData = $identicon->getImageData('bar');
 ```
 
-or generate and get the base 64 image uri ready for an HTML img tag.
+or generate and get the base 64 image uri ready for integrate into an HTML img tag.
 
 ``` php
 $imageDataUri = $identicon->getImageDataUri('bar');
 ```
 ``` html
-<img src="<?php echo $imageDataUri" alt="bar Identicon" />
+<img src="<?php echo $imageDataUri; ?>" alt="bar Identicon" />
 ```
 
 
