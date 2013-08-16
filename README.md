@@ -73,10 +73,19 @@ Then you can generate and display an identicon image
 $identicon->displayImage('foo');
 ```
 
-or generate and get the image data.
+or generate and get the image data
 
 ``` php
 $imageData = $identicon->getImageData('bar');
+```
+
+or generate and get the base 64 image uri ready for an HTML img tag.
+
+``` php
+$imageDataUri = $identicon->getImageDataUri('bar');
+```
+``` html
+<img src="<?php echo $imageDataUri" alt="bar Identicon" />
 ```
 
 

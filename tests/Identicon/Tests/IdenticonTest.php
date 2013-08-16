@@ -10,28 +10,29 @@ use Identicon\Identicon;
 class IdenticonTest extends \PHPUnit_Framework_TestCase
 {
     protected $faker;
+    protected $identicon;
 
     protected function setUp()
     {
         $this->faker = \Faker\Factory::create();
+        $this->identicon = new Identicon();
     }
 
     public function testHash()
     {
-        $identicon = new Identicon();
         for ($i = 0; $i < 50; $i++) {
             // Get the previous hash
-            $previousHash = $identicon->getHash();
+            $previousHash = $this->identicon->getHash();
 
             // Set a new string
-            $identicon->setString($this->faker->email);
+            $this->identicon->setString($this->faker->email);
 
             // Test the hash length
-            $this->assertEquals(32, strlen($identicon->getHash()));
+            $this->assertEquals(32, strlen($this->identicon->getHash()));
 
             // Test the hash generation result
             $this->assertThat(
-                $identicon->getHash(),
+                $this->identicon->getHash(),
                 $this->logicalNot(
                     $this->equalTo($previousHash)
                 )
@@ -41,12 +42,46 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
 
     public function testArrayOfSquare()
     {
-        $identicon = new Identicon();
         for ($i = 0; $i < 50; $i++) {
-            $identicon->setString($this->faker->email);
-            foreach ($identicon->getArrayOfSquare() as $lineKey => $lineValue) {
+            $this->identicon->setString($this->faker->email);
+            foreach ($this->identicon->getArrayOfSquare() as $lineKey => $lineValue) {
                 $this->assertContainsOnly('boolean', $lineValue, true);
             }
         }
+    }
+
+    /**
+     * @dataProvider testColorDataProvider
+     */
+    public function testColor($color, $expected)
+    {
+        $this->assertEquals($expected, $this->identicon->setColor($color)->getColor());
+    }
+    public function testColorDataProvider()
+    {
+        return array(
+            array('#ffffff', array(255, 255, 255)),
+            array('000000', array(0, 0, 0)),
+            array(array(0, 0, 0), array(0, 0, 0)),
+            array(array(255, 255, 255), array(255, 255, 255)),
+        );
+    }
+
+    /**
+     * @dataProvider resultDataProvider
+     */
+    public function testResult($string, $imageData)
+    {
+        $this->assertEquals($imageData, $this->identicon->getImageDataUri($string));
+    }
+    public function resultDataProvider()
+    {
+        return array(
+            array('Benjamin', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEEAAABBCAIAAAABlV4SAAAABnRSTlMAAAAAAABupgeRAAAAkklEQVRoge3YwQnAIBAF0WxIYSltS0tplpB/EByWeWdRBj0sVr99Zfr7X3lktzs8kswGBhsYbGCwgcEGhgkNlU9pWBWuO5WajLcT3pINDDYw2MBgA4MNDBNmvmf7jnu/NBMT3pINDDYw2MBgA4MNDBNmvgn3YAODDQw2MNjAYAODDQz+8zHYwGADgw0MNjDYwLAAnSEUgrvPyzUAAAAASUVORK5CYII='),
+            array('8.8.8.8', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEEAAABBCAIAAAABlV4SAAAABnRSTlMAAAAAAABupgeRAAAAmklEQVRoge3ZwQ2AIBAFUddQmCVYiqVYiiVYmi38A8HJZt6ZbJzAgUhtmec+wpXn9S6etoezyGxgsIHBBgYbGGxg6NAw8uvXL5LP67APNjDYwGADgw0MNjDYwGADgw0MNjDYwGADgw0MBf/Plxj50vUPz+G0DmfJBgYbGGxgsIHBBoYODTV33Nw7X6jDPtjAYAODDQw2MNjA8AG7FBQE2EpVGwAAAABJRU5ErkJggg=='),
+            array('8.8.4.4', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEEAAABBCAIAAAABlV4SAAAABnRSTlMAAAAAAABupgeRAAAAjUlEQVRoge3Y0QmAMAwAUSMO4AiO5miO5giO4AoRYj3Dve9SerQfobFf55RzrFtyZZXk2eaXjzGCDQw2MNjAYAODDQw2SJIk6Q+i9p/vk906zK02MNjAYAODDQw2MHRoeDDzYUVyHXm87fCWbGCwgcEGBhsYbGBYynccP0R2uAcbGGxgsIHBBgYbGDo03F0LGCmCZDLpAAAAAElFTkSuQmCC'),
+            array('yzalis', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEEAAABBCAIAAAABlV4SAAAABnRSTlMAAAAAAABupgeRAAAApklEQVRoge3Y0QmFMBAF0ZeHhViKJVmKJVmKpViCV1h1WOZ8h5AxfiwZv8yxb+HKWvOyXq75v3COp9nAYAODDQw2MNjAYAPDqN0uH2+TgTTU4R5sYLCBwQYGGxhsYBhfPeAVmsp3TIa52g/X4V+ygcEGBhsYbGCwgaFDw425tfBlLhSercM92MBgA4MNDDYw2MDQ4Z2vwz3YwGADgw0MNjDYwNCh4QQmpBMQ2jP6OQAAAABJRU5ErkJggg=='),
+            array('benjaminAtYzalisDotCom', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEEAAABBCAIAAAABlV4SAAAABnRSTlMAAAAAAABupgeRAAAAm0lEQVRoge3ZwQmAQAwFUSMWZCmWYGmWYCmWZAv/IOsY551DYGAPga0ps59rOHls1+Btc7iLzAYGGxhsYLCBwQaGDg2Vn19YSz46/iANt3V4SzYw2MBgA4MNDDYw/OzmCz17GiY6vCUbGGxgsIHBBgYbGDrcfBXOvZXq//R32MBgA4MNDDYwdGjocPP5t8tgA4MNDDYw2MBgA8MNwagdgwLhJLwAAAAASUVORK5CYII='),
+        );
     }
 }

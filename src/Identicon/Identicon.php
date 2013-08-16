@@ -145,7 +145,7 @@ class Identicon
      * @param integer $size
      * @param string $hexaColor
      */
-    public function generateImage($string, $size, $color)
+    private function generateImage($string, $size, $color)
     {
         $this->setString($string);
         $this->setSize($size);
@@ -187,12 +187,25 @@ class Identicon
             $this->color[1] = $color[1];
             $this->color[2] = $color[2];
         } else {
+            if (false !== strpos($color, '#')) {
+                $color = substr($color, 1);
+            }
             $this->color[0] = hexdec(substr($color, 0, 2));
             $this->color[1] = hexdec(substr($color, 2, 2));
             $this->color[2] = hexdec(substr($color, 4, 2));
         }
 
         return $this;
+    }
+
+    /**
+     * Get the color
+     *
+     * @return arrray
+     */
+    public function getColor()
+    {
+        return $this->color;
     }
 
     /**
@@ -225,5 +238,19 @@ class Identicon
         ob_end_clean();
 
         return $imageData;
+    }
+
+    /**
+     * Get an Identicon PNG image data
+     *
+     * @param string  $string
+     * @param integer $size
+     * @param string $hexaColor
+     *
+     * @return string
+     */
+    public function getImageDataUri($string, $size = 64, $hexaColor = null)
+    {
+        return sprintf('data:image/png;base64,%s', base64_encode($this->getImageData($string, $size, $hexaColor)));
     }
 }
