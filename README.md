@@ -54,7 +54,7 @@ You're done.
 
 ## Usage
 
-Images are generated in PNG format with transparent background.
+Images are generated in PNG format with transparent background (default) or a different background color.
 
 The string can be an email, an IP address, a username, an ID or something else.
 
@@ -64,6 +64,12 @@ Create a new ```Identicon``` object.
 
 ``` php
 $identicon = new Identicon();
+```
+
+To select the engine (by default, GD is used)
+
+```php
+$identicon->setEngine('imagemagick');
 ```
 
 Then you can generate and display an identicon image
@@ -85,6 +91,12 @@ $imageDataUri = $identicon->getImageDataUri('bar');
 ```
 ``` html
 <img src="<?php echo $imageDataUri; ?>" alt="bar Identicon" />
+```
+
+or get the raw image handle for further processing
+
+```php
+$imageHandle = $identicon->getImageHandle('bar');
 ```
 
 
@@ -110,6 +122,28 @@ or an array with red, green, blue value
 
 ``` php
 $identicon->displayImage('foo', 64, array(200, 100, 150));
+```
+
+### Background color
+
+By default, the background color is transparent. You can specify color by adding a fourth argument.
+
+Color can be an hexadecimal with 6 characters
+
+``` php
+$identicon->displayImage('bar', 64, null, '#6FC6F5;);
+```
+
+or an array with red, green, blue value
+
+``` php
+$identicon->displayImage('foo', 64, null, array(200, 100, 150));
+```
+
+or `'none'` for transparent
+
+``` php
+$identicon->displayImage('foo', 64, null, 'none');
 ```
 
 That's it!
