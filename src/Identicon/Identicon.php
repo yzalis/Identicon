@@ -28,7 +28,7 @@ class Identicon
      *
      * @var array
      */
-    private $backgroundColor = null;
+    private $backgroundColor = 'none';
 
     /**
      * @var integer
@@ -186,8 +186,9 @@ class Identicon
      * @param string  $string
      * @param integer $size
      * @param string $hexaColor
+     * @param string $backgroundColor
      */
-    private function generateImage($string, $size, $color)
+    private function generateImage($string, $size, $color, $backgroundColor)
     {
         $this->setString($string);
         $this->setSize($size);
@@ -195,6 +196,10 @@ class Identicon
         // prepage the color
         if (null !== $color) {
             $this->setColor($color);
+        }
+
+        if (null !== $backgroundColor) {
+            $this->setBackgroundColor($backgroundColor);
         }
 
         if($this->engine == 'gd'){
@@ -212,7 +217,7 @@ class Identicon
 
         $background = 'none';
 
-        if(!empty($this->backgroundColor)){
+        if($this->backgroundColor !== 'none'){
             $background = new \ImagickPixel("rgb({$this->backgroundColor[0]},{$this->backgroundColor[1]},{$this->backgroundColor[2]})");
         }
 
@@ -242,7 +247,7 @@ class Identicon
         // prepare the image
         $image = imagecreatetruecolor($this->pixelRatio * 5, $this->pixelRatio * 5);
 
-        if(empty($this->backgroundColor)){
+        if($this->backgroundColor === 'none'){
             $background = imagecolorallocate($image, 0, 0, 0);
             imagecolortransparent($image, $background);
         }else{
@@ -313,7 +318,11 @@ class Identicon
      */
     public function setBackgroundColor($backgroundColor)
     {
-        if (is_array($backgroundColor)) {
+        if($backgroundColor === 'none'){
+            $this->backgroundColor = 'none';
+
+        }elseif (is_array($backgroundColor)) {
+            $this->backgroundColor = array();
             $this->backgroundColor[0] = $backgroundColor[0];
             $this->backgroundColor[1] = $backgroundColor[1];
             $this->backgroundColor[2] = $backgroundColor[2];
@@ -321,6 +330,8 @@ class Identicon
             if (false !== strpos($backgroundColor, '#')) {
                 $backgroundColor = substr($backgroundColor, 1);
             }
+
+            $this->backgroundColor = array();
             $this->backgroundColor[0] = hexdec(substr($backgroundColor, 0, 2));
             $this->backgroundColor[1] = hexdec(substr($backgroundColor, 2, 2));
             $this->backgroundColor[2] = hexdec(substr($backgroundColor, 4, 2));
@@ -345,10 +356,13 @@ class Identicon
      * @param string $string
      * @param integer $size
      * @param string $hexaColor
+     * @param string $backgroundColor
+     *
+     * @return resource
      */
-    public function getImageHandle($string, $size = 64, $hexaColor = null)
+    public function getImageHandle($string, $size = 64, $hexaColor = null, $backgroundColor = null)
     {
-        return $this->generateImage($string, $size, $hexaColor);
+        return $this->generateImage($string, $size, $hexaColor, $backgroundColor);
     }
 
     /**
@@ -357,11 +371,12 @@ class Identicon
      * @param string  $string
      * @param integer $size
      * @param string $hexaColor
+     * @param string $backgroundColor
      */
-    public function displayImage($string, $size = 64, $hexaColor = null)
+    public function displayImage($string, $size = 64, $hexaColor = null, $backgroundColor = null)
     {
         header("Content-Type: image/png");
-        $image = $this->generateImage($string, $size, $hexaColor);
+        $image = $this->generateImage($string, $size, $hexaColor, $backgroundColor);
 
         $this->getImageBinaryData($image);
     }
@@ -372,13 +387,14 @@ class Identicon
      * @param string  $string
      * @param integer $size
      * @param string $hexaColor
+     * @param string $backgroundColor
      *
      * @return string
      */
-    public function getImageData($string, $size = 64, $hexaColor = null)
+    public function getImageData($string, $size = 64, $hexaColor = null, $backgroundColor = null)
     {
         ob_start();
-        $image = $this->generateImage($string, $size, $hexaColor);
+        $image = $this->generateImage($string, $size, $hexaColor, $backgroundColor);
 
         $this->getImageBinaryData($image);
 
@@ -394,11 +410,12 @@ class Identicon
      * @param string  $string
      * @param integer $size
      * @param string $hexaColor
+     * @param string $backgroundColor
      *
      * @return string
      */
-    public function getImageDataUri($string, $size = 64, $hexaColor = null)
+    public function getImageDataUri($string, $size = 64, $hexaColor = null, $backgroundColor = null)
     {
-        return sprintf('data:image/png;base64,%s', base64_encode($this->getImageData($string, $size, $hexaColor)));
+        return sprintf('data:image/png;base64,%s', base64_encode($this->getImageData($string, $size, $hexaColor, $backgroundColor)));
     }
 }
