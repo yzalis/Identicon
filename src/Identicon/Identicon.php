@@ -4,6 +4,7 @@ namespace Identicon;
 
 /**
  * @author Benjamin Laugueux <benjamin@yzalis.com>
+ * @author Francis Chuang <francis.chuang@gmail.com>
  */
 class Identicon
 {
@@ -23,14 +24,56 @@ class Identicon
     private $size;
 
     /**
+     * An array containing 3 elements representing r, g and b
+     *
+     * @var array
+     */
+    private $backgroundColor = null;
+
+    /**
      * @var integer
      */
     private $pixelRatio;
 
     /**
+     * @var string
+     * Uses GD by default, because the library has always used GD.
+     */
+    private $engine = 'gd';
+
+    /**
      * @var array
      */
     private $arrayOfSquare = array();
+
+    /**
+     * Sets the engine to be used when generating the identicon
+     *
+     * @param string $engine
+     *
+     * @throws \Exception
+     */
+    public function setEngine($engine)
+    {
+        if($engine == 'gd'){
+
+            if (!extension_loaded('gd')) {
+                throw new \Exception('GD does not appear to be avaliable in your PHP installation. Please try another engine');
+            }
+
+            $this->engine = $engine;
+
+        }elseif($engine == 'imagemagick'){
+
+            if (!extension_loaded('imagick')) {
+                throw new \Exception('ImageMagick does not appear to be avaliable in your PHP installation. Please try another engine');
+            }
+
+            $this->engine = $engine;
+        }else{
+            throw new \Exception('Engine should be either "gd" or "imagemagick".');
+        }
+    }
 
     /**
      * Set the image size
@@ -137,7 +180,6 @@ class Identicon
         return $this->arrayOfSquare;
     }
 
-
     /**
      * Generate the Identicon image
      *
@@ -150,15 +192,64 @@ class Identicon
         $this->setString($string);
         $this->setSize($size);
 
-        // prepare the image
-        $image = imagecreatetruecolor($this->pixelRatio * 5, $this->pixelRatio * 5);
-        $background = imagecolorallocate($image, 0, 0, 0);
-        imagecolortransparent($image, $background);
-
         // prepage the color
         if (null !== $color) {
             $this->setColor($color);
         }
+
+        if($this->engine == 'gd'){
+            return $this->generateWithGD();
+        }elseif($this->engine == 'imagemagick'){
+            return $this->generateWithImageMagick();
+        }else{
+            throw new \Exception("{$this->engine} is not a valid engine for generating the image.");
+        }
+    }
+
+    private function generateWithImageMagick()
+    {
+        $image = new \Imagick();
+
+        $background = 'none';
+
+        if(!empty($this->backgroundColor)){
+            $background = new \ImagickPixel("rgb({$this->backgroundColor[0]},{$this->backgroundColor[1]},{$this->backgroundColor[2]})");
+        }
+
+        $image->newImage($this->pixelRatio * 5, $this->pixelRatio * 5, $background, 'png');
+
+        $color = new \ImagickPixel("rgb({$this->color[0]},{$this->color[1]},{$this->color[2]})");
+
+        $draw = new \ImagickDraw();
+        $draw->setFillColor($color);
+
+        // draw the content
+        foreach ($this->arrayOfSquare as $lineKey => $lineValue) {
+            foreach ($lineValue as $colKey => $colValue) {
+                if (true === $colValue) {
+                    $draw->rectangle( $colKey * $this->pixelRatio, $lineKey * $this->pixelRatio, ($colKey + 1) * $this->pixelRatio, ($lineKey + 1) * $this->pixelRatio);
+                }
+            }
+        }
+
+        $image->drawImage($draw);
+
+        return $image;
+    }
+
+    private function generateWithGD()
+    {
+        // prepare the image
+        $image = imagecreatetruecolor($this->pixelRatio * 5, $this->pixelRatio * 5);
+
+        if(empty($this->backgroundColor)){
+            $background = imagecolorallocate($image, 0, 0, 0);
+            imagecolortransparent($image, $background);
+        }else{
+            $background = imagecolorallocate($image, $this->backgroundColor[0], $this->backgroundColor[1], $this->backgroundColor[2]);
+            imagefill($image, 0,0, $background);
+        }
+
         $color = imagecolorallocate($image, $this->color[0], $this->color[1], $this->color[2]);
 
         // draw the content
@@ -170,7 +261,22 @@ class Identicon
             }
         }
 
-        imagepng($image);
+        return $image;
+    }
+
+    /**
+     * Get the raw binary data
+     *
+     * @param mixed $image
+     */
+    private function getImageBinaryData($image)
+    {
+
+        if($this->engine == 'gd'){
+            imagepng($image);
+        }elseif($this->engine == 'imagemagick'){
+            echo $image;
+        }
     }
 
     /**
@@ -199,6 +305,31 @@ class Identicon
     }
 
     /**
+     * Set the background color
+     *
+     * @param string|array $backgroundColor The color in hexa (6 chars) or rgb array
+     *
+     * @return Identicon
+     */
+    public function setBackgroundColor($backgroundColor)
+    {
+        if (is_array($backgroundColor)) {
+            $this->backgroundColor[0] = $backgroundColor[0];
+            $this->backgroundColor[1] = $backgroundColor[1];
+            $this->backgroundColor[2] = $backgroundColor[2];
+        } else {
+            if (false !== strpos($backgroundColor, '#')) {
+                $backgroundColor = substr($backgroundColor, 1);
+            }
+            $this->backgroundColor[0] = hexdec(substr($backgroundColor, 0, 2));
+            $this->backgroundColor[1] = hexdec(substr($backgroundColor, 2, 2));
+            $this->backgroundColor[2] = hexdec(substr($backgroundColor, 4, 2));
+        }
+
+        return $this;
+    }
+
+    /**
      * Get the color
      *
      * @return arrray
@@ -206,6 +337,18 @@ class Identicon
     public function getColor()
     {
         return $this->color;
+    }
+
+    /**
+     * Returns the handle (imagemagick or GD resource) for further processing by the user
+     *
+     * @param string $string
+     * @param integer $size
+     * @param string $hexaColor
+     */
+    public function getImageHandle($string, $size = 64, $hexaColor = null)
+    {
+        return $this->generateImage($string, $size, $hexaColor);
     }
 
     /**
@@ -218,7 +361,9 @@ class Identicon
     public function displayImage($string, $size = 64, $hexaColor = null)
     {
         header("Content-Type: image/png");
-        $this->generateImage($string, $size, $hexaColor);
+        $image = $this->generateImage($string, $size, $hexaColor);
+
+        $this->getImageBinaryData($image);
     }
 
     /**
@@ -233,7 +378,10 @@ class Identicon
     public function getImageData($string, $size = 64, $hexaColor = null)
     {
         ob_start();
-        $this->generateImage($string, $size, $hexaColor);
+        $image = $this->generateImage($string, $size, $hexaColor);
+
+        $this->getImageBinaryData($image);
+
         $imageData = ob_get_contents();
         ob_end_clean();
 
