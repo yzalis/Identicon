@@ -18,54 +18,6 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
         $this->identicon = new Identicon();
     }
 
-    public function testHash()
-    {
-        for ($i = 0; $i < 50; $i++) {
-            // Get the previous hash
-            $previousHash = $this->identicon->getHash();
-
-            // Set a new string
-            $this->identicon->setString($this->faker->email);
-
-            // Test the hash length
-            $this->assertEquals(32, strlen($this->identicon->getHash()));
-
-            // Test the hash generation result
-            $this->assertThat(
-                $this->identicon->getHash(),
-                $this->logicalNot(
-                    $this->equalTo($previousHash)
-                )
-            );
-        }
-    }
-
-    public function testArrayOfSquare()
-    {
-        for ($i = 0; $i < 50; $i++) {
-            $this->identicon->setString($this->faker->email);
-            foreach ($this->identicon->getArrayOfSquare() as $lineKey => $lineValue) {
-                $this->assertContainsOnly('boolean', $lineValue, true);
-            }
-        }
-    }
-
-    /**
-     * @dataProvider testColorDataProvider
-     */
-    public function testColor($color, $expected)
-    {
-        $this->assertEquals($expected, $this->identicon->setColor($color)->getColor());
-    }
-    public function testColorDataProvider()
-    {
-        return array(
-            array('#ffffff', array(255, 255, 255)),
-            array('000000', array(0, 0, 0)),
-            array(array(0, 0, 0), array(0, 0, 0)),
-            array(array(255, 255, 255), array(255, 255, 255)),
-        );
-    }
 
     /**
      * @dataProvider resultDataProvider
