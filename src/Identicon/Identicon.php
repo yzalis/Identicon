@@ -60,7 +60,7 @@ class Identicon
      */
     public function getImageData($string, $size = 64, $color = null, $backgroundColor = null)
     {
-        return $this->generator->getImageBinaryData($string, $size, $color = null, $backgroundColor = null);
+        return $this->generator->getImageBinaryData($string, $size, $color, $backgroundColor);
     }
 
     /**
@@ -75,7 +75,7 @@ class Identicon
      */
     public function getImageResource($string, $size = 64, $color = null, $backgroundColor = null)
     {
-        return $this->generator->getImageResource($string, $size, $color = null, $backgroundColor = null);
+        return $this->generator->getImageResource($string, $size, $color, $backgroundColor);
     }
 
     /**
@@ -90,6 +90,6 @@ class Identicon
      */
     public function getImageDataUri($string, $size = 64, $color = null, $backgroundColor = null)
     {
-        return sprintf('data:image/png;base64,%s', base64_encode($this->getImageData($string, $size, $color = null, $backgroundColor = null)));
+        return sprintf('data:image/png;base64,%s', base64_encode($this->getImageData($string, $size, $color, $backgroundColor)));
     }
 }

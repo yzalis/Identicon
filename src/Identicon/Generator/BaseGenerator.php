@@ -57,20 +57,46 @@ class BaseGenerator
             return $this;
         }
 
+        $this->color = $this->convertColor($color);
+
+        return $this;
+    }
+
+    /**
+     * Set the image background color
+     *
+     * @param string|array $backgroundColor The color in hexa (6 chars) or rgb array
+     *
+     * @return this
+     */
+    public function setBackgroundColor($backgroundColor)
+    {
+        if (null === $backgroundColor) {
+            return $this;
+        }
+
+        $this->backgroundColor = $this->convertColor($backgroundColor);
+
+        return $this;
+    }
+
+    private function convertColor($color)
+    {
+        $convertedColor = array();
         if (is_array($color)) {
-            $this->color[0] = $color[0];
-            $this->color[1] = $color[1];
-            $this->color[2] = $color[2];
+            $convertedColor[0] = $color[0];
+            $convertedColor[1] = $color[1];
+            $convertedColor[2] = $color[2];
         } else {
             if (false !== strpos($color, '#')) {
                 $color = substr($color, 1);
             }
-            $this->color[0] = hexdec(substr($color, 0, 2));
-            $this->color[1] = hexdec(substr($color, 2, 2));
-            $this->color[2] = hexdec(substr($color, 4, 2));
+            $convertedColor[0] = hexdec(substr($color, 0, 2));
+            $convertedColor[1] = hexdec(substr($color, 2, 2));
+            $convertedColor[2] = hexdec(substr($color, 4, 2));
         }
 
-        return $this;
+        return $convertedColor;
     }
 
     /**
@@ -81,6 +107,17 @@ class BaseGenerator
     public function getColor()
     {
         return $this->color;
+    }
+
+
+    /**
+     * Get the background color
+     *
+     * @return array
+     */
+    public function getBackgroundColor()
+    {
+        return $this->backgroundColor;
     }
 
     /**

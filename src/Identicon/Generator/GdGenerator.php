@@ -20,8 +20,15 @@ class GdGenerator extends BaseGenerator implements GeneratorInterface
     {
         // prepare image
         $this->generatedImage = imagecreatetruecolor($this->getPixelRatio() * 5, $this->getPixelRatio() * 5);
-        $background = imagecolorallocate($this->generatedImage, 0, 0, 0);
-        imagecolortransparent($this->generatedImage, $background);
+
+        $rgbBackgroundColor = $this->getBackgroundColor();
+        if (null === $rgbBackgroundColor) {
+            $background = imagecolorallocate($this->generatedImage, 0, 0, 0);
+            imagecolortransparent($this->generatedImage, $background);
+        } else {
+            $background = imagecolorallocate($this->generatedImage, $rgbBackgroundColor[0], $rgbBackgroundColor[1], $rgbBackgroundColor[2]);
+            imagefill($this->generatedImage, 0, 0, $background);
+        }
 
         // prepage color
         $rgbColor = $this->getColor();
@@ -61,6 +68,7 @@ class GdGenerator extends BaseGenerator implements GeneratorInterface
             ->setString($string)
             ->setSize($size)
             ->setColor($color)
+            ->setBackgroundColor($backgroundColor)
             ->generateImage();
 
         return $this->generatedImage;
