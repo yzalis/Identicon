@@ -51,13 +51,14 @@ class BaseGeneratorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider testColorDataProvider
+     * @dataProvider testColorsDataProvider
      */
-    public function testColor($color, $expected)
+    public function testColors($color, $expected)
     {
+        $this->assertEquals($expected, $this->generator->setBackgroundColor($color)->getBackgroundColor());
         $this->assertEquals($expected, $this->generator->setColor($color)->getColor());
     }
-    public function testColorDataProvider()
+    public function testColorsDataProvider()
     {
         return array(
             array('#ffffff', array(255, 255, 255)),
