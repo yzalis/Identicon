@@ -15,9 +15,14 @@ class Identicon
      */
     private $generator;
 
-    public function __construct()
+    public function __construct($generator = null)
     {
-        $this->generator = new GdGenerator();
+        if (null === $generator) {
+            $this->generator = new GdGenerator();
+        } else {
+            $this->generator = $generator;
+        }
+
     }
 
     /**
