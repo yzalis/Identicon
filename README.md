@@ -63,7 +63,7 @@ The string can be an email, an IP address, a username, an ID or something else.
 Create a new ```Identicon``` object.
 
 ``` php
-$identicon = new Identicon();
+$identicon = new \Identicon\Identicon();
 ```
 
 Then you can generate and display an identicon image
