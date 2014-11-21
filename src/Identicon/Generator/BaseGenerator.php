@@ -30,6 +30,12 @@ class BaseGenerator
     protected $size;
 
     /**
+     * @var interger
+     */
+    
+    protected $marginSize;
+    
+    /**
      * @var integer
      */
     protected $pixelRatio;
@@ -129,16 +135,18 @@ class BaseGenerator
     {
         preg_match_all('/(\w)(\w)/', $this->hash, $chars);
         foreach ($chars[1] as $i => $char) {
-            if ($i % 3 == 0) {
-                $this->arrayOfSquare[$i/3][0] = $this->convertHexaToBoolean($char);
-                $this->arrayOfSquare[$i/3][4] = $this->convertHexaToBoolean($char);
-            } elseif ($i % 3 == 1) {
-                $this->arrayOfSquare[$i/3][1] = $this->convertHexaToBoolean($char);
-                $this->arrayOfSquare[$i/3][3] = $this->convertHexaToBoolean($char);
-            } else {
-                $this->arrayOfSquare[$i/3][2] = $this->convertHexaToBoolean($char);
-            }
-            ksort($this->arrayOfSquare[$i/3]);
+        	if($i < 15){//fix issue #7
+	            if ($i % 3 == 0) {
+	                $this->arrayOfSquare[$i/3][0] = $this->convertHexaToBoolean($char);
+	                $this->arrayOfSquare[$i/3][4] = $this->convertHexaToBoolean($char);
+	            } elseif ($i % 3 == 1) {
+	                $this->arrayOfSquare[$i/3][1] = $this->convertHexaToBoolean($char);
+	                $this->arrayOfSquare[$i/3][3] = $this->convertHexaToBoolean($char);
+	            } else {
+	                $this->arrayOfSquare[$i/3][2] = $this->convertHexaToBoolean($char);
+	            }
+	            ksort($this->arrayOfSquare[$i/3]);
+        	}
         }
 
         $this->color[0] = hexdec(array_pop($chars[1]))*16;
@@ -229,6 +237,33 @@ class BaseGenerator
         return $this->size;
     }
 
+    
+    /**
+     * Set the image margin size
+     * 
+     * @param integer $size
+     * 
+     * @return this
+     */
+    public function setMarginSize($size)
+    {
+    	if(null === $size) return $this;
+
+    	$this->marginSize = $size;
+    	
+    	return $this;
+    }
+    
+    /**
+     * Get margin size
+     * 
+     * @return interger
+     */
+    public function getMarginSize()
+    {
+    	return $this->marginSize;
+    }
+    
     /**
      * Get the pixel ratio
      *

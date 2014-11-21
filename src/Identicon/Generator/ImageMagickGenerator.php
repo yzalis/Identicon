@@ -27,7 +27,7 @@ class ImageMagickGenerator extends BaseGenerator implements GeneratorInterface
             $background = new \ImagickPixel("rgb($rgbBackgroundColor[0],$rgbBackgroundColor[1],$rgbBackgroundColor[2])");
         }
 
-        $this->generatedImage->newImage($this->pixelRatio * 5, $this->pixelRatio * 5, $background, 'png');
+        $this->generatedImage->newImage($this->pixelRatio * 5 + $this->getMarginSize() * 2, $this->pixelRatio * 5  + $this->getMarginSize() * 2, $background, 'png');
 
         // prepare color
         $rgbColor = $this->getColor();
@@ -40,7 +40,10 @@ class ImageMagickGenerator extends BaseGenerator implements GeneratorInterface
         foreach ($this->getArrayOfSquare() as $lineKey => $lineValue) {
             foreach ($lineValue as $colKey => $colValue) {
                 if (true === $colValue) {
-                    $draw->rectangle( $colKey * $this->pixelRatio, $lineKey * $this->pixelRatio, ($colKey + 1) * $this->pixelRatio, ($lineKey + 1) * $this->pixelRatio);
+                    $draw->rectangle( $colKey * $this->pixelRatio + $this->getMarginSize(), 
+                    		$lineKey * $this->pixelRatio + $this->getMarginSize(), 
+                    		($colKey + 1) * $this->pixelRatio + $this->getMarginSize(), 
+                    		($lineKey + 1) * $this->pixelRatio + $this->getMarginSize());
                 }
             }
         }
@@ -53,10 +56,10 @@ class ImageMagickGenerator extends BaseGenerator implements GeneratorInterface
     /**
      * {@inheritDoc}
      */
-    public function getImageBinaryData($string, $size = null, $color = null, $backgroundColor = null)
+    public function getImageBinaryData($string, $size = null, $color = null, $backgroundColor = null, $marginSize = null)
     {
         ob_start();
-        echo $this->getImageResource($string, $size, $color, $backgroundColor);
+        echo $this->getImageResource($string, $size, $color, $backgroundColor, $marginSize);
         $imageData = ob_get_contents();
         ob_end_clean();
 
@@ -66,13 +69,14 @@ class ImageMagickGenerator extends BaseGenerator implements GeneratorInterface
     /**
      * {@inheritDoc}
      */
-    public function getImageResource($string, $size = null, $color = null, $backgroundColor = null)
+    public function getImageResource($string, $size = null, $color = null, $backgroundColor = null, $marginSize = null)
     {
         $this
             ->setString($string)
             ->setSize($size)
             ->setColor($color)
             ->setBackgroundColor($backgroundColor)
+            ->setMarginSize($marginSize)
             ->generateImage();
 
         return $this->generatedImage;

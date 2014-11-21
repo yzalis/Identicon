@@ -47,10 +47,10 @@ class Identicon
      * @param string  $color
      * @param string  $backgroundColor
      */
-    public function displayImage($string, $size = 64, $color = null, $backgroundColor = null)
+    public function displayImage($string, $size = 64, $color = null, $backgroundColor = null, $marginSize = null)
     {
         header("Content-Type: image/png");
-        echo $this->getImageData($string, $size, $color, $backgroundColor);
+        echo $this->getImageData($string, $size, $color, $backgroundColor, $marginSize);
     }
 
     /**
@@ -63,9 +63,9 @@ class Identicon
      *
      * @return string
      */
-    public function getImageData($string, $size = 64, $color = null, $backgroundColor = null)
+    public function getImageData($string, $size = 64, $color = null, $backgroundColor = null, $marginSize = null)
     {
-        return $this->generator->getImageBinaryData($string, $size, $color, $backgroundColor);
+        return $this->generator->getImageBinaryData($string, $size, $color, $backgroundColor, $marginSize);
     }
 
     /**
@@ -78,9 +78,9 @@ class Identicon
      *
      * @return string
      */
-    public function getImageResource($string, $size = 64, $color = null, $backgroundColor = null)
+    public function getImageResource($string, $size = 64, $color = null, $backgroundColor = null, $marginSize = null)
     {
-        return $this->generator->getImageResource($string, $size, $color, $backgroundColor);
+        return $this->generator->getImageResource($string, $size, $color, $backgroundColor, $marginSize);
     }
 
     /**
@@ -93,8 +93,8 @@ class Identicon
      *
      * @return string
      */
-    public function getImageDataUri($string, $size = 64, $color = null, $backgroundColor = null)
+    public function getImageDataUri($string, $size = 64, $color = null, $backgroundColor = null, $marginSize = null)
     {
-        return sprintf('data:image/png;base64,%s', base64_encode($this->getImageData($string, $size, $color, $backgroundColor)));
+        return sprintf('data:image/png;base64,%s', base64_encode($this->getImageData($string, $size, $color, $backgroundColor, $marginSize)));
     }
 }
