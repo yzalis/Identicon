@@ -8,8 +8,6 @@ namespace Identicon\Generator;
 interface GeneratorInterface
 {
     /**
-     *
-     *
      * @param  string       $string
      * @param  integer      $size
      * @param  array|string $color
@@ -17,11 +15,9 @@ interface GeneratorInterface
      *
      * @return mixed
      */
-    function getImageBinaryData($string, $size = null, $color = null, $backgroundColor = null);
+    public function getImageBinaryData($string, $size = null, $color = null, $backgroundColor = null);
 
     /**
-     *
-     *
      * @param  string       $string
      * @param  integer      $size
      * @param  array|string $color
@@ -29,5 +25,12 @@ interface GeneratorInterface
      *
      * @return string
      */
-    function getImageResource($string, $size = null, $color = null, $backgroundColor = null);
+    public function getImageResource($string, $size = null, $color = null, $backgroundColor = null);
+
+    /**
+     * Return the mime-type of this identicon
+     * 
+     * @return string
+     */
+    public function getMimeType();
 }
