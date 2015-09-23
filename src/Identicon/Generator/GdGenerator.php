@@ -16,6 +16,11 @@ class GdGenerator extends BaseGenerator implements GeneratorInterface
         }
     }
 
+    public function getMimeType()
+    {
+        return 'image/png';
+    }
+
     private function generateImage()
     {
         // prepare image

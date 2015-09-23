@@ -114,6 +114,16 @@ $identicon->displayImage('foo', 64, array(200, 100, 150));
 
 That's it!
 
+### Generate an identicon on SVG format
+
+The only thing you need to change it this one :
+``` php
+$identicon = new Identicon(new SvgGenerator());
+$imageDataUri = $identicon->getImageDataUri('bar');
+<img src="<?= $imageDataUri; ?>" alt="bar Identicon" />
+```
+
+
 ## Unit Tests
 
 To run unit tests, you'll need and a set of dependencies you can install using Composer:

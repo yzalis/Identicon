@@ -16,6 +16,11 @@ class ImageMagickGenerator extends BaseGenerator implements GeneratorInterface
         }
     }
 
+    public function getMimeType()
+    {
+        return 'image/png';
+    }
+
     private function generateImage()
     {
         $this->generatedImage = new \Imagick();
