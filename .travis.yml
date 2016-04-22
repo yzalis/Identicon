@@ -9,4 +9,4 @@ before_script:
     - printf "\n" | pecl install imagick
     - composer install --prefer-dist
 
-script: phpunit --coverage-text
+script: vendor/bin/phpunit --coverage-text
