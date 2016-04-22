@@ -43,7 +43,7 @@ class ImageMagickGenerator extends BaseGenerator implements GeneratorInterface
         foreach ($this->getArrayOfSquare() as $lineKey => $lineValue) {
             foreach ($lineValue as $colKey => $colValue) {
                 if (true === $colValue) {
-                    $draw->rectangle( $colKey * $this->pixelRatio, $lineKey * $this->pixelRatio, ($colKey + 1) * $this->pixelRatio, ($lineKey + 1) * $this->pixelRatio);
+                    $draw->rectangle($colKey * $this->pixelRatio, $lineKey * $this->pixelRatio, ($colKey + 1) * $this->pixelRatio, ($lineKey + 1) * $this->pixelRatio);
                 }
             }
         }

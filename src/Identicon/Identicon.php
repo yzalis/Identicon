@@ -22,7 +22,6 @@ class Identicon
         } else {
             $this->generator = $generator;
         }
-
     }
 
     /**
