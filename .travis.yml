@@ -7,6 +7,6 @@ php:
 
 before_script:
     - printf "\n" | pecl install imagick
-    - composer install
+    - composer install --prefer-dist
 
 script: phpunit --coverage-text
