@@ -47,7 +47,7 @@ class BaseGenerator
      *
      * @param string|array $color The color in hexa (6 chars) or rgb array
      *
-     * @return this
+     * @return $this
      */
     public function setColor($color)
     {
@@ -65,7 +65,7 @@ class BaseGenerator
      *
      * @param string|array $backgroundColor The color in hexa (6 chars) or rgb array
      *
-     * @return this
+     * @return $this
      */
     public function setBackgroundColor($backgroundColor)
     {
@@ -121,7 +121,7 @@ class BaseGenerator
     /**
      * Convert the hash into an multidimensionnal array of boolean
      *
-     * @return this
+     * @return $this
      */
     private function convertHashToArrayOfBoolean()
     {
@@ -183,7 +183,7 @@ class BaseGenerator
      *
      * @param string $string
      *
-     * @return this
+     * @return $this
      */
     public function setString($string)
     {
@@ -203,7 +203,7 @@ class BaseGenerator
      *
      * @param integer $size
      *
-     * @return this
+     * @return $this
      */
     public function setSize($size)
     {
