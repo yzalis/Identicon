@@ -2,8 +2,6 @@
 
 namespace Identicon\Generator;
 
-use Identicon\Generator\GeneratorInterface;
-
 /**
  * @author Benjamin Laugueux <benjamin@yzalis.com>
  */

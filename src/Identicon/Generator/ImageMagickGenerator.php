@@ -2,8 +2,6 @@
 
 namespace Identicon\Generator;
 
-use Identicon\Generator\GeneratorInterface;
-
 /**
  * @author Francis Chuang <francis.chuang@gmail.com>
  */
