@@ -2,7 +2,11 @@
     "name": "yzalis/identicon",
     "type": "library",
     "description": "Create awesome unique avatar.",
-    "keywords": ["identicon", "avatar", "image"],
+    "keywords": [
+        "avatar",
+        "identicon",
+        "image"
+    ],
     "homepage": "http://identicon-php.org",
     "license": "MIT",
     "authors": [
@@ -19,7 +23,9 @@
         "ext-imagick": "*"
     },
     "autoload": {
-        "psr-0": { "Identicon": "src/" }
+        "psr-0": {
+            "Identicon": "src/"
+        }
     },
     "extra": {
         "branch-alias": {
