@@ -60,11 +60,11 @@ class BaseGeneratorTest extends \PHPUnit_Framework_TestCase
     }
     public function testColorsDataProvider()
     {
-        return array(
-            array('#ffffff', array(255, 255, 255)),
-            array('000000', array(0, 0, 0)),
-            array(array(0, 0, 0), array(0, 0, 0)),
-            array(array(255, 255, 255), array(255, 255, 255)),
-        );
+        return [
+            ['#ffffff', [255, 255, 255]],
+            ['000000', [0, 0, 0]],
+            [[0, 0, 0], [0, 0, 0]],
+            [[255, 255, 255], [255, 255, 255]],
+        ];
     }
 }
