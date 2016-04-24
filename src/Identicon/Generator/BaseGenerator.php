@@ -40,7 +40,7 @@ class BaseGenerator
     /**
      * @var array
      */
-    private $arrayOfSquare = array();
+    private $arrayOfSquare = [];
 
     /**
      * Set the image color
@@ -80,7 +80,7 @@ class BaseGenerator
 
     private function convertColor($color)
     {
-        $convertedColor = array();
+        $convertedColor = [];
         if (is_array($color)) {
             $convertedColor[0] = $color[0];
             $convertedColor[1] = $color[1];
