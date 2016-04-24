@@ -2,6 +2,9 @@
 
 namespace Identicon\Generator;
 
+use ImagickDraw;
+use ImagickPixel;
+
 /**
  * @author Francis Chuang <francis.chuang@gmail.com>
  */
@@ -27,16 +30,16 @@ class ImageMagickGenerator extends BaseGenerator implements GeneratorInterface
         if (null === $rgbBackgroundColor) {
             $background = 'none';
         } else {
-            $background = new \ImagickPixel("rgb($rgbBackgroundColor[0],$rgbBackgroundColor[1],$rgbBackgroundColor[2])");
+            $background = new ImagickPixel("rgb($rgbBackgroundColor[0],$rgbBackgroundColor[1],$rgbBackgroundColor[2])");
         }
 
         $this->generatedImage->newImage($this->pixelRatio * 5, $this->pixelRatio * 5, $background, 'png');
 
         // prepare color
         $rgbColor = $this->getColor();
-        $color = new \ImagickPixel("rgb($rgbColor[0],$rgbColor[1],$rgbColor[2])");
+        $color = new ImagickPixel("rgb($rgbColor[0],$rgbColor[1],$rgbColor[2])");
 
-        $draw = new \ImagickDraw();
+        $draw = new ImagickDraw();
         $draw->setFillColor($color);
 
         // draw the content
