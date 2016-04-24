@@ -49,8 +49,7 @@ class SvgGenerator extends BaseGenerator implements GeneratorInterface
 
         $backgroundColor = '#FFFFFF';
         $rgbBackgroundColor = $this->getBackgroundColor();
-        if (!is_null($rgbBackgroundColor))
-        {
+        if (!is_null($rgbBackgroundColor)) {
             $backgroundColor = $this->_toUnderstandableColor($rgbBackgroundColor);
         }
         $svg .= '<rect width="'. $w .'" height="'. $h .'" style="fill:'. $backgroundColor .';stroke-width:1;stroke:' . $backgroundColor .'"/>';
@@ -61,7 +60,6 @@ class SvgGenerator extends BaseGenerator implements GeneratorInterface
             foreach ($lineValue as $colKey => $colValue) {
                 if (true === $colValue) {
                     $svg .= '<rect x="'. $colKey * $this->getPixelRatio() .'" y="'. $lineKey * $this->getPixelRatio() .'" width="'.($this->getPixelRatio()) .'" height="'. $this->getPixelRatio() .'" style="fill:'. $rgbColor .';stroke-width:0;"/>';
-
                 }
             }
         }
