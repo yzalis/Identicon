@@ -29,7 +29,7 @@ interface GeneratorInterface
 
     /**
      * Return the mime-type of this identicon
-     * 
+     *
      * @return string
      */
     public function getMimeType();
