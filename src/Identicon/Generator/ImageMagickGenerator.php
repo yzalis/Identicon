@@ -13,6 +13,7 @@ class ImageMagickGenerator extends BaseGenerator implements GeneratorInterface
 {
     /**
      * ImageMagickGenerator constructor.
+     *
      * @throws \Exception
      */
     public function __construct()
