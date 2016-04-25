@@ -11,10 +11,15 @@ use Identicon\Generator\GeneratorInterface;
 class Identicon
 {
     /**
-     * @var GeneratorInterface
+     * @var \Identicon\Generator\GeneratorInterface
      */
     private $generator;
 
+    /**
+     * Identicon constructor.
+     *
+     * @param \Identicon\Generator\GeneratorInterface|null $generator
+     */
     public function __construct($generator = null)
     {
         if (null === $generator) {
@@ -27,9 +32,9 @@ class Identicon
     /**
      * Set the image generetor
      *
-     * @param GeneratorInterface $generator
+     * @param \Identicon\Generator\GeneratorInterface $generator
      *
-     * @throws \Exception
+     * @return $this
      */
     public function setGenerator(GeneratorInterface $generator)
     {

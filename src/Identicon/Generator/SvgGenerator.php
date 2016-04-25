@@ -40,6 +40,9 @@ class SvgGenerator extends BaseGenerator implements GeneratorInterface
         return $this->generatedImage;
     }
 
+    /**
+     * @return $this
+     */
     protected function _generateImage()
     {
         // prepare image
@@ -73,6 +76,7 @@ class SvgGenerator extends BaseGenerator implements GeneratorInterface
 
     /**
      * @param array|string $color
+     *
      * @return string
      */
     protected function _toUnderstandableColor($color)

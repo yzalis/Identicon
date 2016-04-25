@@ -9,6 +9,9 @@ use Exception;
  */
 class GdGenerator extends BaseGenerator implements GeneratorInterface
 {
+    /**
+     * GdGenerator constructor.
+     */
     public function __construct()
     {
         if (!extension_loaded('gd')) {
@@ -16,11 +19,17 @@ class GdGenerator extends BaseGenerator implements GeneratorInterface
         }
     }
 
+    /**
+     * @return string
+     */
     public function getMimeType()
     {
         return 'image/png';
     }
 
+    /**
+     * @return $this
+     */
     private function generateImage()
     {
         // prepare image
