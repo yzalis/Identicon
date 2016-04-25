@@ -61,7 +61,7 @@ class GdGenerator extends BaseGenerator implements GeneratorInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getImageBinaryData($string, $size = null, $color = null, $backgroundColor = null)
     {
@@ -74,7 +74,7 @@ class GdGenerator extends BaseGenerator implements GeneratorInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getImageResource($string, $size = null, $color = null, $backgroundColor = null)
     {

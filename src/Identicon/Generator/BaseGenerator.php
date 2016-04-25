@@ -15,22 +15,22 @@ class BaseGenerator
     protected $generatedImage;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $color;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $backgroundColor;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $size;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $pixelRatio;
 
@@ -45,7 +45,7 @@ class BaseGenerator
     private $arrayOfSquare = [];
 
     /**
-     * Set the image color
+     * Set the image color.
      *
      * @param string|array $color The color in hexa (6 chars) or rgb array
      *
@@ -63,7 +63,7 @@ class BaseGenerator
     }
 
     /**
-     * Set the image background color
+     * Set the image background color.
      *
      * @param string|array $backgroundColor The color in hexa (6 chars) or rgb array
      *
@@ -100,7 +100,7 @@ class BaseGenerator
     }
 
     /**
-     * Get the color
+     * Get the color.
      *
      * @return array
      */
@@ -109,9 +109,8 @@ class BaseGenerator
         return $this->color;
     }
 
-
     /**
-     * Get the background color
+     * Get the background color.
      *
      * @return array
      */
@@ -121,7 +120,7 @@ class BaseGenerator
     }
 
     /**
-     * Convert the hash into an multidimensionnal array of boolean
+     * Convert the hash into an multidimensionnal array of boolean.
      *
      * @return $this
      */
@@ -143,28 +142,26 @@ class BaseGenerator
             ksort($this->arrayOfSquare[$index]);
         }
 
-        $this->color[0] = hexdec(array_pop($chars[1]))*16;
-        $this->color[1] = hexdec(array_pop($chars[1]))*16;
-        $this->color[2] = hexdec(array_pop($chars[1]))*16;
+        $this->color[0] = hexdec(array_pop($chars[1])) * 16;
+        $this->color[1] = hexdec(array_pop($chars[1])) * 16;
+        $this->color[2] = hexdec(array_pop($chars[1])) * 16;
 
         return $this;
     }
 
     /**
-     * Convert an heaxecimal number into a boolean
+     * Convert an heaxecimal number into a boolean.
      *
      * @param string $hexa
      *
-     * @return boolean
+     * @return bool
      */
     private function convertHexaToBoolean($hexa)
     {
-        return (bool) intval(round(hexdec($hexa)/10));
+        return (bool) intval(round(hexdec($hexa) / 10));
     }
 
     /**
-     *
-     *
      * @return array
      */
     public function getArrayOfSquare()
@@ -173,7 +170,7 @@ class BaseGenerator
     }
 
     /**
-     * Get the identicon string hash
+     * Get the identicon string hash.
      *
      * @return string
      */
@@ -183,13 +180,13 @@ class BaseGenerator
     }
 
     /**
-     * Generate a hash fron the original string
+     * Generate a hash fron the original string.
      *
      * @param string $string
      *
-     * @return $this
-     *
      * @throws \Exception
+     *
+     * @return $this
      */
     public function setString($string)
     {
@@ -205,9 +202,9 @@ class BaseGenerator
     }
 
     /**
-     * Set the image size
+     * Set the image size.
      *
-     * @param integer $size
+     * @param int $size
      *
      * @return $this
      */
@@ -224,9 +221,9 @@ class BaseGenerator
     }
 
     /**
-     * Get the image size
+     * Get the image size.
      *
-     * @return integer
+     * @return int
      */
     public function getSize()
     {
@@ -234,7 +231,7 @@ class BaseGenerator
     }
 
     /**
-     * Get the pixel ratio
+     * Get the pixel ratio.
      *
      * @return array
      */

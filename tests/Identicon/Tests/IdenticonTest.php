@@ -19,7 +19,6 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
         $this->identicon = new Identicon();
     }
 
-
     /**
      * @dataProvider resultDataProvider
      */
@@ -27,6 +26,7 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals($imageData, $this->identicon->getImageDataUri($string));
     }
+
     public function resultDataProvider()
     {
         return [
@@ -46,6 +46,7 @@ class IdenticonTest extends \PHPUnit_Framework_TestCase
         $this->identicon->setGenerator(new ImageMagickGenerator());
         $this->assertEquals($imageData, $this->identicon->getImageDataUri($string));
     }
+
     public function imageMagickResultDataProvider()
     {
         return [
