@@ -2,9 +2,9 @@
 
 namespace Identicon\Generator;
 
+use Exception;
 use ImagickDraw;
 use ImagickPixel;
-use Exception;
 
 /**
  * @author Francis Chuang <francis.chuang@gmail.com>
