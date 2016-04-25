@@ -30,7 +30,7 @@ class Identicon
     }
 
     /**
-     * Set the image generetor.
+     * Set the image generator.
      *
      * @param \Identicon\Generator\GeneratorInterface $generator
      *

@@ -44,7 +44,7 @@ class GdGenerator extends BaseGenerator implements GeneratorInterface
             imagefill($this->generatedImage, 0, 0, $background);
         }
 
-        // prepage color
+        // prepare color
         $rgbColor = $this->getColor();
         $gdColor = imagecolorallocate($this->generatedImage, $rgbColor[0], $rgbColor[1], $rgbColor[2]);
 
