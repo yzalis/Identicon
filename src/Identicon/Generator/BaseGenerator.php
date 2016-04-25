@@ -120,7 +120,7 @@ class BaseGenerator
     }
 
     /**
-     * Convert the hash into an multidimensionnal array of boolean.
+     * Convert the hash into an multidimensional array of boolean.
      *
      * @return $this
      */
@@ -150,7 +150,7 @@ class BaseGenerator
     }
 
     /**
-     * Convert an heaxecimal number into a boolean.
+     * Convert an hexadecimal number into a boolean.
      *
      * @param string $hexa
      *
@@ -180,7 +180,7 @@ class BaseGenerator
     }
 
     /**
-     * Generate a hash fron the original string.
+     * Generate a hash from the original string.
      *
      * @param string $string
      *
