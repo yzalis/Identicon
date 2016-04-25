@@ -142,11 +142,9 @@ class BaseGenerator
             ksort($this->arrayOfSquare[$index]);
         }
 
-        $this->color = array_map(function($data){
-            return hexdec($data)*16;
+        $this->color = array_map(function ($data) {
+            return hexdec($data) * 16;
         }, array_reverse($chars[1]));
-
-        
 
         return $this;
     }
