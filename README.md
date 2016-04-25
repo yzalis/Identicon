@@ -21,7 +21,7 @@ Just create a `composer.json` file for your project:
 ``` json
 {
     "require": {
-        "yzalis/identicon": "*"
+        "yzalis/identicon": "^1.1"
     }
 }
 ```
@@ -39,14 +39,6 @@ Now you can add the autoloader, and you will have access to the library:
 <?php
 
 require 'vendor/autoload.php';
-```
-
-If you don't use either **Composer** or a _ClassLoader_ in your application, just require the provided autoloader:
-
-``` php
-<?php
-
-require_once 'src/autoload.php';
 ```
 
 You're done.
@@ -98,7 +90,7 @@ $identicon->displayImage('foo', 512);
 
 ### Color
 
-The color is automaticaly generated according to the string hash but you can chose to specify a color by adding a third argument.
+The color is automatically generated according to the string hash but you can chose to specify a color by adding a third argument.
 
 Color can be an hexadecimal with 6 characters
 
@@ -116,9 +108,9 @@ That's it!
 
 ### Generate an identicon on SVG format
 
-The only thing you need to change it this one :
+The only thing you need to change it this one:
 ``` php
-$identicon = new Identicon(new SvgGenerator());
+$identicon = new \Identicon\Identicon(new SvgGenerator());
 $imageDataUri = $identicon->getImageDataUri('bar');
 <img src="<?= $imageDataUri; ?>" alt="bar Identicon" />
 ```
@@ -135,16 +127,16 @@ php composer.phar install
 Once installed, just launch the following command:
 
 ```
-phpunit
+./vendor/bin/phpunit
 ```
 
-Everythings should be ok.
+Everything should be ok.
 
 
 ## Credits
 
 * Benjamin Laugueux <benjamin@laugueux.org>
-* [All contributors](https://github.com/yzalis/Identicon)
+* [All contributors](https://github.com/yzalis/Identicon/graphs/contributors)
 
 Inspired by Github [blog post](https://github.com/blog/1586-identicons) about Identicon.
 
