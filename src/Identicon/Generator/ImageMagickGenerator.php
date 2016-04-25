@@ -4,6 +4,7 @@ namespace Identicon\Generator;
 
 use ImagickDraw;
 use ImagickPixel;
+use Exception;
 
 /**
  * @author Francis Chuang <francis.chuang@gmail.com>
@@ -12,11 +13,12 @@ class ImageMagickGenerator extends BaseGenerator implements GeneratorInterface
 {
     /**
      * ImageMagickGenerator constructor.
+     * @throws \Exception
      */
     public function __construct()
     {
         if (!extension_loaded('imagick')) {
-            throw new \Exception('ImageMagick does not appear to be avaliable in your PHP installation. Please try another generator');
+            throw new Exception('ImageMagick does not appear to be avaliable in your PHP installation. Please try another generator');
         }
     }
 
