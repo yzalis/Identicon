@@ -126,6 +126,7 @@ class BaseGenerator
     private function convertHashToArrayOfBoolean()
     {
         preg_match_all('/(\w)(\w)/', $this->hash, $chars);
+
         foreach ($chars[1] as $i => $char) {
             $index = (int) ($i / 3);
             $data = $this->convertHexaToBoolean($char);
@@ -141,9 +142,11 @@ class BaseGenerator
             ksort($this->arrayOfSquare[$index]);
         }
 
-        $this->color[0] = hexdec(array_pop($chars[1])) * 16;
-        $this->color[1] = hexdec(array_pop($chars[1])) * 16;
-        $this->color[2] = hexdec(array_pop($chars[1])) * 16;
+        $this->color = array_map(function($data){
+            return hexdec($data)*16;
+        }, array_reverse($chars[1]));
+
+        
 
         return $this;
     }
