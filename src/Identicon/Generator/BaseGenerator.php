@@ -130,14 +130,15 @@ class BaseGenerator
         preg_match_all('/(\w)(\w)/', $this->hash, $chars);
         foreach ($chars[1] as $i => $char) {
             $index = (int) ($i / 3);
+            $data = $this->convertHexaToBoolean($char);
             if ($i % 3 == 0) {
-                $this->arrayOfSquare[$index][0] = $this->convertHexaToBoolean($char);
-                $this->arrayOfSquare[$index][4] = $this->convertHexaToBoolean($char);
+                $this->arrayOfSquare[$index][0] = $data;
+                $this->arrayOfSquare[$index][4] = $data;
             } elseif ($i % 3 == 1) {
-                $this->arrayOfSquare[$index][1] = $this->convertHexaToBoolean($char);
-                $this->arrayOfSquare[$index][3] = $this->convertHexaToBoolean($char);
+                $this->arrayOfSquare[$index][1] = $data;
+                $this->arrayOfSquare[$index][3] = $data;
             } else {
-                $this->arrayOfSquare[$index][2] = $this->convertHexaToBoolean($char);
+                $this->arrayOfSquare[$index][2] = $data;
             }
             ksort($this->arrayOfSquare[$index]);
         }
