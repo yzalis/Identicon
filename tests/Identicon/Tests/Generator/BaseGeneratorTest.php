@@ -20,7 +20,7 @@ class BaseGeneratorTest extends \PHPUnit_Framework_TestCase
 
     public function testHash()
     {
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 50; ++$i) {
             // Get the previous hash
             $previousHash = $this->generator->getHash();
 
@@ -42,7 +42,7 @@ class BaseGeneratorTest extends \PHPUnit_Framework_TestCase
 
     public function testArrayOfSquare()
     {
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 50; ++$i) {
             $this->generator->setString($this->faker->email);
             foreach ($this->generator->getArrayOfSquare() as $lineKey => $lineValue) {
                 $this->assertContainsOnly('boolean', $lineValue, true);
@@ -58,6 +58,7 @@ class BaseGeneratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $this->generator->setBackgroundColor($color)->getBackgroundColor());
         $this->assertEquals($expected, $this->generator->setColor($color)->getColor());
     }
+
     public function testColorsDataProvider()
     {
         return [

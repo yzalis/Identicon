@@ -30,7 +30,7 @@ class Identicon
     }
 
     /**
-     * Set the image generetor
+     * Set the image generetor.
      *
      * @param \Identicon\Generator\GeneratorInterface $generator
      *
@@ -44,26 +44,26 @@ class Identicon
     }
 
     /**
-     * Display an Identicon image
+     * Display an Identicon image.
      *
-     * @param string  $string
-     * @param integer $size
-     * @param string  $color
-     * @param string  $backgroundColor
+     * @param string $string
+     * @param int    $size
+     * @param string $color
+     * @param string $backgroundColor
      */
     public function displayImage($string, $size = 64, $color = null, $backgroundColor = null)
     {
-        header("Content-Type: " . $this->generator->getMimeType());
+        header('Content-Type: '.$this->generator->getMimeType());
         echo $this->getImageData($string, $size, $color, $backgroundColor);
     }
 
     /**
-     * Get an Identicon PNG image data
+     * Get an Identicon PNG image data.
      *
-     * @param string  $string
-     * @param integer $size
-     * @param string  $color
-     * @param string  $backgroundColor
+     * @param string $string
+     * @param int    $size
+     * @param string $color
+     * @param string $backgroundColor
      *
      * @return string
      */
@@ -73,12 +73,12 @@ class Identicon
     }
 
     /**
-     * Get an Identicon PNG image resource
+     * Get an Identicon PNG image resource.
      *
-     * @param string  $string
-     * @param integer $size
-     * @param string  $color
-     * @param string  $backgroundColor
+     * @param string $string
+     * @param int    $size
+     * @param string $color
+     * @param string $backgroundColor
      *
      * @return string
      */
@@ -88,12 +88,12 @@ class Identicon
     }
 
     /**
-     * Get an Identicon PNG image data as base 64 encoded
+     * Get an Identicon PNG image data as base 64 encoded.
      *
-     * @param string  $string
-     * @param integer $size
-     * @param string  $color
-     * @param string  $backgroundColor
+     * @param string $string
+     * @param int    $size
+     * @param string $color
+     * @param string $backgroundColor
      *
      * @return string
      */
