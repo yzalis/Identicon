@@ -10,7 +10,11 @@ php:
   - 7.0
 
 before_script:
+  - pip install --user codecov
   - printf "\n" | pecl install imagick
   - composer install --prefer-dist
 
 script: vendor/bin/phpunit --coverage-text
+
+after_success:
+  - codecov
