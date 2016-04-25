@@ -1,6 +1,7 @@
-preset: psr2
+preset: symfony
 
 enabled:
+  - phpdoc_order
   - short_array_syntax
 
 linting: true
