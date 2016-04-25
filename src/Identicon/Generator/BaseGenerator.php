@@ -187,6 +187,8 @@ class BaseGenerator
      * @param string $string
      *
      * @return $this
+     *
+     * @throws \Exception
      */
     public function setString($string)
     {
