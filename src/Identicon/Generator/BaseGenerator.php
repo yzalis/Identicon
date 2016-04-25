@@ -80,23 +80,22 @@ class BaseGenerator
         return $this;
     }
 
+    /**
+     * @param array|string $color
+     *
+     * @return array
+     */
     private function convertColor($color)
     {
-        $convertedColor = [];
         if (is_array($color)) {
-            $convertedColor[0] = $color[0];
-            $convertedColor[1] = $color[1];
-            $convertedColor[2] = $color[2];
-        } else {
-            if (false !== strpos($color, '#')) {
-                $color = substr($color, 1);
-            }
-            $convertedColor[0] = hexdec(substr($color, 0, 2));
-            $convertedColor[1] = hexdec(substr($color, 2, 2));
-            $convertedColor[2] = hexdec(substr($color, 4, 2));
+            return $color;
         }
 
-        return $convertedColor;
+        preg_match('/#?([a-z\d]{2})([a-z\d]{2})([a-z\d]{2})/i', $color, $matches);
+
+        return array_map(function ($value) {
+            return hexdec($value);
+        }, array_slice($matches, 1, 3));
     }
 
     /**
