@@ -129,16 +129,17 @@ class BaseGenerator
     {
         preg_match_all('/(\w)(\w)/', $this->hash, $chars);
         foreach ($chars[1] as $i => $char) {
+            $index = (int) ($i / 3);
             if ($i % 3 == 0) {
-                $this->arrayOfSquare[$i/3][0] = $this->convertHexaToBoolean($char);
-                $this->arrayOfSquare[$i/3][4] = $this->convertHexaToBoolean($char);
+                $this->arrayOfSquare[$index][0] = $this->convertHexaToBoolean($char);
+                $this->arrayOfSquare[$index][4] = $this->convertHexaToBoolean($char);
             } elseif ($i % 3 == 1) {
-                $this->arrayOfSquare[$i/3][1] = $this->convertHexaToBoolean($char);
-                $this->arrayOfSquare[$i/3][3] = $this->convertHexaToBoolean($char);
+                $this->arrayOfSquare[$index][1] = $this->convertHexaToBoolean($char);
+                $this->arrayOfSquare[$index][3] = $this->convertHexaToBoolean($char);
             } else {
-                $this->arrayOfSquare[$i/3][2] = $this->convertHexaToBoolean($char);
+                $this->arrayOfSquare[$index][2] = $this->convertHexaToBoolean($char);
             }
-            ksort($this->arrayOfSquare[$i/3]);
+            ksort($this->arrayOfSquare[$index]);
         }
 
         $this->color[0] = hexdec(array_pop($chars[1]))*16;
