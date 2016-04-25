@@ -1,6 +1,7 @@
 preset: symfony
 
 enabled:
+  - ordered_imports
   - phpdoc_order
   - short_array_syntax
 
