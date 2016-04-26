@@ -11,6 +11,7 @@ php:
 
 before_script:
   - printf "\n" | pecl install imagick
-  - composer install --prefer-dist
+  - travis_retry composer self-update
+  - travis_retry composer install --prefer-dist
 
 script: vendor/bin/phpunit --coverage-text
