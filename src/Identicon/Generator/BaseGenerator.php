@@ -47,7 +47,7 @@ class BaseGenerator
     /**
      * Set the image color.
      *
-     * @param string|array $color The color in hexa (6 chars) or rgb array
+     * @param string|array $color The color in hexa (3 or 6 chars) or rgb array
      *
      * @return $this
      */
@@ -65,7 +65,7 @@ class BaseGenerator
     /**
      * Set the image background color.
      *
-     * @param string|array $backgroundColor The color in hexa (6 chars) or rgb array
+     * @param string|array $backgroundColor The color in hexa (3 or 6 chars) or rgb array
      *
      * @return $this
      */
@@ -91,7 +91,13 @@ class BaseGenerator
             return $color;
         }
 
-        preg_match('/#?([a-z\d]{2})([a-z\d]{2})([a-z\d]{2})/i', $color, $matches);
+        if (preg_match('/^#?([a-z\d])([a-z\d])([a-z\d])$/i', $color, $matches)) {
+            $color = $matches[1].$matches[1];
+            $color .= $matches[2].$matches[2];
+            $color .= $matches[3].$matches[3];
+        }
+
+        preg_match('/#?([a-z\d]{2})([a-z\d]{2})([a-z\d]{2})$/i', $color, $matches);
 
         return array_map(function ($value) {
             return hexdec($value);
