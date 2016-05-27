@@ -28,6 +28,9 @@
             "Identicon\\": "src/Identicon/"
         }
     },
+    "config": {
+        "preferred-install": "dist"
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.1-dev"
