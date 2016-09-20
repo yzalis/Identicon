@@ -13,6 +13,8 @@ before_script:
   - printf "\n" | pecl install imagick
   - travis_retry composer install --no-interaction --prefer-dist --no-suggest
 
-script: vendor/bin/phpunit --coverage-text
+script:
+  - vendor/bin/phpunit --verbose --coverage-text --coverage-clover=coverage.xml
 
-after_success: bash <(curl -s https://codecov.io/bash)
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
