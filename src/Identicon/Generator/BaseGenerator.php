@@ -138,9 +138,9 @@ class BaseGenerator
             $data = $this->convertHexaToBoolean($char);
 
             $items = [
-              0 => [0, 4],
-              1 => [1, 3],
-              2 => [2],
+                0 => [0, 4],
+                1 => [1, 3],
+                2 => [2],
             ];
 
             foreach ($items[$i % 3] as $item) {
