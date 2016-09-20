@@ -52,6 +52,9 @@ class BaseGeneratorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider testColorsDataProvider
+     *
+     * @param string $color
+     * @param array  $expected
      */
     public function testColors($color, $expected)
     {
@@ -63,7 +66,18 @@ class BaseGeneratorTest extends \PHPUnit_Framework_TestCase
     {
         return [
             ['#ffffff', [255, 255, 255]],
+            ['ffffff', [255, 255, 255]],
+            ['#000000', [0, 0, 0]],
             ['000000', [0, 0, 0]],
+            ['#fff', [255, 255, 255]],
+            ['fff', [255, 255, 255]],
+            ['#000', [0, 0, 0]],
+            ['000', [0, 0, 0]],
+            ['#f0f', [255, 0, 255]],
+            ['f0f', [255, 0, 255]],
+            ['#0f0', [0, 255, 0]],
+            ['0f0', [0, 255, 0]],
+            ['111', [17, 17, 17]],
             [[0, 0, 0], [0, 0, 0]],
             [[255, 255, 255], [255, 255, 255]],
         ];
