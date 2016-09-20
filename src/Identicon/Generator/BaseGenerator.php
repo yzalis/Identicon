@@ -223,7 +223,7 @@ class BaseGenerator
         }
 
         $this->size = $size;
-        $this->pixelRatio = round($size / 5);
+        $this->pixelRatio = (int) round($size / 5);
 
         return $this;
     }
@@ -241,7 +241,7 @@ class BaseGenerator
     /**
      * Get the pixel ratio.
      *
-     * @return array
+     * @return int
      */
     public function getPixelRatio()
     {
