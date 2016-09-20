@@ -28,6 +28,11 @@
             "Identicon\\": "src/Identicon/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Identicon\\Tests\\": "tests/Identicon/Tests/"
+        }
+    },
     "config": {
         "preferred-install": "dist"
     },
