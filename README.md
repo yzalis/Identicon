@@ -1,6 +1,7 @@
 # Identicon generator for PHP
 
 [![Build Status](https://secure.travis-ci.org/yzalis/Identicon.png)](http://travis-ci.org/yzalis/Identicon)
+[![codecov.io](https://codecov.io/github/yzalis/Identicon/coverage.svg?branch=master)](https://codecov.io/github/yzalis/Identicon?branch=master)
 
 **Identicon** is a library which generate an [identicon](http://en.wikipedia.org/wiki/Identicon) image based on a string.
 

@@ -15,3 +15,5 @@ before_script:
   - travis_retry composer install
 
 script: vendor/bin/phpunit --coverage-text
+
+after_success: bash <(curl -s https://codecov.io/bash)
