@@ -15,12 +15,12 @@ class BaseGenerator
     protected $generatedImage;
 
     /**
-     * @var int
+     * @var array
      */
     protected $color;
 
     /**
-     * @var int
+     * @var array
      */
     protected $backgroundColor;
 
