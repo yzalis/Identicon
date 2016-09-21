@@ -87,4 +87,16 @@ class GdGenerator extends BaseGenerator implements GeneratorInterface
 
         return $this->generatedImage;
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public function saveImageToFile($string, $filename, $size = null, $color = null, $backgroundColor = null)
+    {
+		$succeeded = imagepng($this->getImageResource($string, $size, $color, $backgroundColor), $filename, 9);
+		if($succeeded) {
+			imagedestroy($this->generatedImage);
+		}
+		return $succeeded;
+    }
 }

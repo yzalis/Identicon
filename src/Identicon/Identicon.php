@@ -101,4 +101,23 @@ class Identicon
     {
         return sprintf('data:%s;base64,%s', $this->generator->getMimeType(), base64_encode($this->getImageData($string, $size, $color, $backgroundColor)));
     }
+    
+    /**
+     * Generate an Identicon PNG and save it to a file. Will always return false if not using the Gd generator.
+     *
+     * @param string  $string
+	 * @param string  $filename
+     * @param integer $size
+     * @param string  $color
+     * @param string  $backgroundColor
+     *
+     * @return bool
+     */
+	public function saveImageToFile($string, $filename, $size = null, $color = null, $backgroundColor = null)
+    {
+		if($this->generator instanceof GdGenerator) {
+			return $this->generator->saveImageToFile($string, $filename, $size, $color, $backgroundColor);
+		}
+		return false;
+    }
 }
