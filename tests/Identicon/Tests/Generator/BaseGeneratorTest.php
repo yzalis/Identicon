@@ -10,7 +10,7 @@ use Identicon\Generator\BaseGenerator;
 class BaseGeneratorTest extends \PHPUnit_Framework_TestCase
 {
     protected $faker;
-    protected $identicon;
+    protected $generator;
 
     protected function setUp()
     {
