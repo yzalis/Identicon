@@ -166,7 +166,7 @@ class BaseGenerator
      */
     private function convertHexaToBoolean($hexa)
     {
-        return (bool) intval(round(hexdec($hexa) / 10));
+        return (bool) round(hexdec($hexa) / 10);
     }
 
     /**
