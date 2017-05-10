@@ -110,13 +110,14 @@ class Identicon
 	 * 
 	 * @return array
 	 */
-	public function getColor() {
+	public function getColor()
+    {
 		$colors = $this->generator->getColor();
 
-        return array(
+        return [
             "r" => $colors[0],
             "g" => $colors[1],
             "b" => $colors[2]
-        );
+        ];
 	}
 }
