@@ -101,4 +101,22 @@ class Identicon
     {
         return sprintf('data:%s;base64,%s', $this->generator->getMimeType(), base64_encode($this->getImageData($string, $size, $color, $backgroundColor)));
     }
+	
+	/**
+	 * Get the color of the Identicon
+     *
+     * Returns an array with RGB values of the Identicon's color. Colors may be NULL if no image has been generated
+     * so far (e.g., when calling the method on a new Identicon()).
+	 * 
+	 * @return array
+	 */
+	public function getColor() {
+		$colors = $this->generator->getColor();
+
+        return array(
+            "r" => $colors[0],
+            "g" => $colors[1],
+            "b" => $colors[2]
+        );
+	}
 }
