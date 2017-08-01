@@ -17,33 +17,11 @@ Here is some examples of awesome results!
 
 The recommended way to install Identicon is through composer.
 
-Just create a `composer.json` file for your project:
-
-``` json
-{
-    "require": {
-        "yzalis/identicon": "^1.1"
-    }
-}
-```
-
-And run these two commands to install it:
+Just add the library to your project:
 
 ``` bash
-$ wget http://getcomposer.org/composer.phar
-$ php composer.phar install
+composer require yzalis/identicon
 ```
-
-Now you can add the autoloader, and you will have access to the library:
-
-``` php
-<?php
-
-require 'vendor/autoload.php';
-```
-
-You're done.
-
 
 ## Usage
 
