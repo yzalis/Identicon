@@ -14,7 +14,7 @@ class GdGenerator extends BaseGenerator implements GeneratorInterface
      */
     public function __construct()
     {
-        if (!extension_loaded('gd') || !extension_loaded('ext-gd') ) {
+        if (!extension_loaded('gd') && !extension_loaded('ext-gd')) {
             throw new Exception('GD does not appear to be available in your PHP installation. Please try another generator');
         }
     }
