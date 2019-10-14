@@ -11,6 +11,7 @@ php:
 
 before_script:
   - printf "\n" | pecl install imagick
+  - convert -version
   - travis_retry composer install --no-interaction --prefer-dist --no-suggest
 
 script:
