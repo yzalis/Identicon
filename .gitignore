@@ -1,6 +1,28 @@
-examples/
+# Dependencies
 vendor/
 composer.lock
 composer.phar
+
+# IDE
+.idea/
+.vscode/
+*.sublime-*
+.claude
+
+# Testing
 phpunit.xml
+.phpunit.cache/
+coverage/
+coverage.xml
+
+# Tools
 php-cs-fixer.phar
+.php-cs-fixer.cache
+
+# Build
+build/
+dist/
+
+# OS
+.DS_Store
+Thumbs.db

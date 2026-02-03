@@ -1,13 +1,17 @@
 {
     "name": "yzalis/identicon",
     "type": "library",
-    "description": "Create awesome unique avatar.",
+    "description": "Generate unique identicon avatars from any string",
     "keywords": [
         "avatar",
         "identicon",
-        "image"
+        "image",
+        "hash",
+        "unique",
+        "svg",
+        "png"
     ],
-    "homepage": "http://identicon-php.org",
+    "homepage": "https://github.com/yzalis/Identicon",
     "license": "MIT",
     "authors": [
         {
@@ -16,29 +20,51 @@
         }
     ],
     "require": {
-        "php": ">=5.5.0"
+        "php": ">=8.2"
     },
     "require-dev": {
+        "ext-gd": "*",
         "ext-imagick": "*",
-        "fzaninotto/faker": "^1.2.0",
-        "phpunit/phpunit": "^4.0 || ^5.0"
+        "phpunit/phpunit": "^10.5",
+        "phpstan/phpstan": "^1.10",
+        "phpstan/phpstan-strict-rules": "^1.5",
+        "friendsofphp/php-cs-fixer": "^3.40"
+    },
+    "suggest": {
+        "ext-gd": "Required for GD-based PNG generation (default renderer)",
+        "ext-imagick": "Required for ImageMagick-based generation"
     },
     "autoload": {
         "psr-4": {
-            "Identicon\\": "src/Identicon/"
+            "Yzalis\\Identicon\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Identicon\\Tests\\": "tests/Identicon/Tests/"
+            "Yzalis\\Identicon\\Tests\\": "tests/"
         }
     },
     "config": {
+        "sort-packages": true,
         "preferred-install": "dist"
+    },
+    "scripts": {
+        "test": "phpunit",
+        "test:coverage": "phpunit --coverage-html=coverage",
+        "analyze": "phpstan analyse",
+        "cs": "php-cs-fixer fix --dry-run --diff",
+        "cs:fix": "php-cs-fixer fix",
+        "ci": [
+            "@cs",
+            "@analyze",
+            "@test"
+        ]
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.0-dev"
+            "dev-master": "3.0-dev"
         }
-    }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }
